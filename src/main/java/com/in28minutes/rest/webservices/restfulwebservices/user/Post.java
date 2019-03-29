@@ -5,6 +5,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Post {
@@ -12,9 +17,13 @@ public class Post {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
+	@NotBlank(message="Description must be filled")
+	@ApiModelProperty(notes="Description must be filled")
 	private String description;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
+	@JsonIgnore
 	private User user;
 	
 	
